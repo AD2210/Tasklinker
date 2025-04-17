@@ -2,7 +2,9 @@
 
 namespace App\Factory;
 
+use App\Entity\Employee;
 use App\Entity\Project;
+use App\Repository\EmployeeRepository;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
@@ -13,7 +15,7 @@ final class ProjectFactory extends PersistentProxyObjectFactory
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
      *
-     * @todo inject services if required
+     * 
      */
     public function __construct()
     {
@@ -27,13 +29,14 @@ final class ProjectFactory extends PersistentProxyObjectFactory
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
      *
-     * @todo add your default values here
+     * 
      */
     protected function defaults(): array|callable
     {
         return [
             'archived' => self::faker()->boolean(),
-            'name' => self::faker()->text(120),
+            'name' => self::faker()->sentence(5),
+            'employees' =>self::faker()->randomElements(EmployeeFactory::all(),random_int(0,4))
         ];
     }
 
