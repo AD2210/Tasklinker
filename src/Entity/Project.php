@@ -22,9 +22,9 @@ class Project
     private ?bool $archived = null;
 
     /**
-     * @var Collection<int, task>
+     * @var Collection<int, Task>
      */
-    #[ORM\OneToMany(targetEntity: task::class, mappedBy: 'project')]
+    #[ORM\OneToMany(targetEntity: Task::class, mappedBy: 'project')]
     private ?Collection $tasks = null;
 
     /**
