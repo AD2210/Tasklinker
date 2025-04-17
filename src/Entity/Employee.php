@@ -35,13 +35,13 @@ class Employee
      * @var Collection<int, Project>
      */
     #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'employees')]
-    private Collection $projects;
+    private ?Collection $projects = null;
 
     /**
      * @var Collection<int, Task>
      */
     #[ORM\OneToMany(targetEntity: Task::class, mappedBy: 'employee')]
-    private Collection $tasks;
+    private ?Collection $tasks = null;
 
     public function __construct()
     {

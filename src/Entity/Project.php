@@ -25,13 +25,13 @@ class Project
      * @var Collection<int, task>
      */
     #[ORM\OneToMany(targetEntity: task::class, mappedBy: 'project')]
-    private Collection $tasks;
+    private ?Collection $tasks = null;
 
     /**
      * @var Collection<int, Employee>
      */
     #[ORM\ManyToMany(targetEntity: Employee::class, inversedBy: 'projects')]
-    private Collection $employees;
+    private ?Collection $employees = null;
 
     public function __construct()
     {

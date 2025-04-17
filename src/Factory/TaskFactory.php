@@ -32,8 +32,10 @@ final class TaskFactory extends PersistentProxyObjectFactory
         return [
             'status' => self::faker()->randomElement(['To Do', 'Doing', 'Done']),
             'title' => self::faker()->sentence(3),
-            'project' => self::faker()->randomElement([ProjectFactory::all()]),
-            'employee' => self::faker()->randomElement([EmployeeFactory::findBy(['projects' => self::last('project')])])
+            'description' =>self::faker()->randomElement([null, self::faker()->paragraph()]),
+            'deadline' =>self::faker()->randomElement([null, self::faker()->dateTimeInInterval('-30 days','+2 months')]),
+            'project' => self::faker()->randomElement(ProjectFactory::all()),
+            'employee' => self::faker()->randomElement(EmployeeFactory::all())
         ];
     }
 
