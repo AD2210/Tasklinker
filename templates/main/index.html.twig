@@ -13,15 +13,17 @@
         <div id="content">
             <div id="projects-container">
                 {% for project in projects %}
-                    <article class="card-project">
-                        <a href="#">
-                            <h2>{{project.name}}</h2>
-                        </a>
-                        <div class="card-project-icons">
-                            <a href="projet-edit.html"><i class="fa-solid fa-pen"></i></a>
-                            <a href="#"><i class="fa-solid fa-trash"></i></a>
-                        </div>
-                    </article>    
+                    {% if project.archived == 0 %}
+                       <article class="card-project">
+                            <a href="#">
+                                <h2>{{project.name}}</h2>
+                            </a>
+                            <div class="card-project-icons">
+                                <a href="projet-edit.html"><i class="fa-solid fa-pen"></i></a>
+                                <a href="#"><i class="fa-solid fa-trash"></i></a>
+                            </div>
+                        </article>  
+                    {% endif %}
                 {% endfor %}
                 <article class="card-project">
                     <a href="projet-add.html">
