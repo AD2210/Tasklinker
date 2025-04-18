@@ -173,6 +173,6 @@ class Employee
 
     public function getFullName () : string
     {
-        return $this-> name .' ' .$this-> firstname;
+        return $this-> firstname .' ' .$this-> name;
     }
 }

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% set action = app.current_route == 'app_task_new' ? 'Créer une tâche' : 'Gestion des droits d\'accès' %}
+{% set buttonAction = app.current_route == 'app_task_new' ? 'Ajouter' : 'Modifier' %}
 {% block title %}{{ action }} - {{ parent()}}{% endblock %}
 
 {% block body %}
@@ -19,9 +20,9 @@
                     {{ form_row(form.status) }}
                     {{ form_row(form.employee) }}
                     <br>
-                    <button type="submit" class="button button-submit">Modifier</button>
-                    {% if app.current_route != 'app_task_new' %}
-                        <a href="#" class="delete-task">Supprimer la tâche</a>    
+                    <button type="submit" class="button button-submit">{{buttonAction}}</button>
+                    {% if app.current_route == 'app_task_edit' %}
+                        <a href="{{path('app_task_remove', {task_id: task.id, project_id: project.id})}}" class="delete-task">Supprimer la tâche</a>    
                     {% endif %}
                 {{ form_end(form) }}
              </div>

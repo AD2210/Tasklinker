@@ -51,7 +51,6 @@ class TaskType extends AbstractType
                     return $employee->getFullName();
                 },
             ])
-            ->add('Project', HiddenType::class, ['mapped' => false])
         ;
     }
 
