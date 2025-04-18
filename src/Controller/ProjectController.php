@@ -31,7 +31,7 @@ final class ProjectController extends AbstractController
             ]);
         }
 
-        return $this->render('project/edition.html.twig', [
+        return $this->render('project/projectForm.html.twig', [
             'controller_name' => 'ProjectController',
             'form' => $form,
             'project' => $project
