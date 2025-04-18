@@ -21,7 +21,9 @@ class ProjectType extends AbstractType
             ->add('employees', EntityType::class, [
                 'label' => 'Inviter des membres',
                 'class' => Employee::class,
-                'choice_label' => 'name',
+                'choice_label' => function (Employee $employee) : string {
+                    return $employee->getFullName();
+                },
                 'multiple' => true,
             ])
             ->add('archived', HiddenType::class, ['mapped' => false])
