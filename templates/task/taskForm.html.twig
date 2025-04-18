@@ -20,7 +20,9 @@
                     {{ form_row(form.employee) }}
                     <br>
                     <button type="submit" class="button button-submit">Modifier</button>
-                    <a href="#" class="delete-task">Supprimer la tâche</a>
+                    {% if app.current_route != 'app_task_new' %}
+                        <a href="#" class="delete-task">Supprimer la tâche</a>    
+                    {% endif %}
                 {{ form_end(form) }}
              </div>
          </main>

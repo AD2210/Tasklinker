@@ -21,13 +21,21 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class, ['label' => 'Titre de la tâche'])
+            ->add('title', TextType::class, [
+                'label' => 'Titre de la tâche',
+                'required' => true
+                ])
             ->add('deadline', DateType::class, [
+                'required' => false,
                 'label' => 'date',
                 'widget' => 'single_text',
             ])
-            ->add('description', TextareaType::class, ['label' => 'Description'])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description',
+                'required' => false
+                ])
             ->add('status', ChoiceType::class, [
+                'required' => true,
                 'label' => 'Statut',
                 'choices' => [
                     'To Do' => 'To Do',
@@ -36,9 +44,12 @@ class TaskType extends AbstractType
                 ]
             ])
             ->add('employee', EntityType::class, [
+                'required' => false,
                 'label' => 'membre',
                 'class' => Employee::class,
-                'choice_label' => 'name',
+                'choice_label' => function (Employee $employee) : string {
+                    return $employee->getFullName();
+                },
             ])
             ->add('Project', HiddenType::class, ['mapped' => false])
         ;
