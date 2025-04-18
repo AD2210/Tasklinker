@@ -16,7 +16,7 @@ final class ProjectController extends AbstractController
     #[Route('/project/{id}/edit', name: 'app_project_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function projectEdition(?Project $project, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $project ??= new Project; //Si aucun projet passer = Nouveau si non edition
+        $project ??= new Project; //Si aucun projet passé = Nouveau, si non edition
         $form = $this->createForm(ProjectType::class, $project);
         $form->get('archived')->setData(false);
         
@@ -31,7 +31,7 @@ final class ProjectController extends AbstractController
             ]);
         }
 
-        return $this->render('project/edition.html.twig', [
+        return $this->render('project/projectForm.html.twig', [
             'controller_name' => 'ProjectController',
             'form' => $form,
             'project' => $project

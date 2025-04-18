@@ -29,7 +29,7 @@
                 <div class="tasks-list">
                 {% for toDoTask in project.tasks %}
                     {% if toDoTask.status == 'To Do' %}
-                        <a class="task" href="#">
+                        <a class="task" href="{{path('app_task_edit', {project_id: project.id, task_id: toDoTask.id})}}">
                             <h3>{{toDoTask.title}}</h3>
                             <p>{{toDoTask.description}}</p>
                             <div class="task-infos">
@@ -48,7 +48,7 @@
                         </a>    
                     {% endif %}
                 {% endfor %}
-                <a href="tache-add.html" class="task-add">
+                <a href="{{path('app_task_new', {project_id: project.id})}}" class="task-add">
                 + Ajouter une tâche
                 </a>
                 </div>
@@ -58,7 +58,7 @@
                 <div class="tasks-list">
                 {% for doingTask in project.tasks %}
                     {% if doingTask.status == 'Doing' %}
-                        <a class="task" href="#">
+                        <a class="task" href="{{path('app_task_edit', {task_id: doingTask.id, project_id: project.id})}}">
                             <h3>{{doingTask.title}}</h3>
                             <p>{{doingTask.description}}</p>
                             <div class="task-infos">
@@ -77,7 +77,7 @@
                         </a>    
                     {% endif %}
                 {% endfor %}
-                <a href="tache-add.html" class="task-add">
+                <a href="{{path('app_task_new', {project_id: project.id})}}" class="task-add">
                 + Ajouter une tâche
                 </a>
                 </div>
@@ -87,7 +87,7 @@
                 <div class="tasks-list">
                 {% for doneTask in project.tasks %}
                     {% if doneTask.status == 'Done' %}
-                        <a class="task" href="#">
+                        <a class="task" href="{{path('app_task_edit', {task_id: doneTask.id, project_id: project.id})}}">
                             <h3>{{doneTask.title}}</h3>
                             <p>{{doneTask.description}}</p>
                             <div class="task-infos">
@@ -106,7 +106,7 @@
                         </a>    
                     {% endif %} 
                 {% endfor %}
-                <a href="tache-add.html" class="task-add">
+                <a href="{{path('app_task_new', {project_id: project.id})}}" class="task-add">
                 + Ajouter une tâche
                 </a>
                 </div>

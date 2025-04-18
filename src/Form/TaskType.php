@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Employee;
 use App\Entity\Project;
 use App\Entity\Task;
+use Doctrine\Persistence\Proxy;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,13 +21,21 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class, ['label' => 'Titre de la tâche'])
+            ->add('title', TextType::class, [
+                'label' => 'Titre de la tâche',
+                'required' => true
+                ])
             ->add('deadline', DateType::class, [
+                'required' => false,
                 'label' => 'date',
                 'widget' => 'single_text',
             ])
-            ->add('description', TextareaType::class, ['label' => 'Description'])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description',
+                'required' => false
+                ])
             ->add('status', ChoiceType::class, [
+                'required' => true,
                 'label' => 'Statut',
                 'choices' => [
                     'To Do' => 'To Do',
@@ -34,14 +43,13 @@ class TaskType extends AbstractType
                     'Done' => 'Done'
                 ]
             ])
-            ->add('project', HiddenType::class, [
-                'class' => Project::class,
-                'choice_label' => 'id',
-                'project_id' => $options['project_id']
-            ])
             ->add('employee', EntityType::class, [
+                'required' => false,
+                'label' => 'membre',
                 'class' => Employee::class,
-                'choice_label' => 'id',
+                'choice_label' => function (Employee $employee) : string {
+                    return $employee->getFullName();
+                },
             ])
         ;
     }
