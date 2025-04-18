@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Employee;
 use App\Entity\Project;
 use App\Entity\Task;
+use Doctrine\Persistence\Proxy;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -37,8 +38,9 @@ class TaskType extends AbstractType
             ->add('employee', EntityType::class, [
                 'label' => 'membre',
                 'class' => Employee::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
+            ->add('Project', HiddenType::class, ['mapped' => false])
         ;
     }
 

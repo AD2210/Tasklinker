@@ -1,17 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% set action = app.current_route == 'app_task_new' ? 'Nouvelle tâche' : (task.title) %}
+{% set action = app.current_route == 'app_task_new' ? 'Créer une tâche' : 'Gestion des droits d\'accès' %}
 {% block title %}{{ action }} - {{ parent()}}{% endblock %}
 
 {% block body %}
     <main>
         <header>
-            <div id="current-user"></div>
-            <div id="title-page">
-                <h1>{{ action }}</h1>
-            </div>
-        </header>
-        <div id="content">
-        </div>
-    </main>
+               <div id="current-user"></div>
+               <div id="title-page">
+                  <h1>{{action}}</h1>
+               </div>
+            </header>
+            <div id="content">
+               {{ form_start(form) }}
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.deadline) }}
+                    {{ form_row(form.status) }}
+                    {{ form_row(form.employee) }}
+                    <br>
+                    <button type="submit" class="button button-submit">Modifier</button>
+                    <a href="#" class="delete-task">Supprimer la tâche</a>
+                {{ form_end(form) }}
+             </div>
+         </main>
 {% endblock %}
