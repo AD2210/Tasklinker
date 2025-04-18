@@ -34,12 +34,8 @@ class TaskType extends AbstractType
                     'Done' => 'Done'
                 ]
             ])
-            ->add('project', HiddenType::class, [
-                'class' => Project::class,
-                'choice_label' => 'id',
-                'project_id' => $options['project_id']
-            ])
             ->add('employee', EntityType::class, [
+                'label' => 'membre',
                 'class' => Employee::class,
                 'choice_label' => 'id',
             ])

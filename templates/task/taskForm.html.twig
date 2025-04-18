@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% set action = app.current_route == 'app_task_new' ? 'Nouveau Projet' : (project.name) %}
+{% set action = app.current_route == 'app_task_new' ? 'Nouvelle tâche' : (task.title) %}
 {% block title %}{{ action }} - {{ parent()}}{% endblock %}
 
 {% block body %}
@@ -12,16 +12,6 @@
             </div>
         </header>
         <div id="content">
-            {{ form_start(form) }}
-                <div>
-                    {{ form_row(form.name) }}
-                </div>
-                <div>
-                    {{ form_row(form.employees) }}
-                </div>
-                <br>
-                <button type="submit" class="button button-submit">Continuer</button>
-            {{ form_end(form) }}
         </div>
     </main>
 {% endblock %}
