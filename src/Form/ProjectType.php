@@ -6,6 +6,8 @@ use App\Entity\Employee;
 use App\Entity\Project;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,6 +24,7 @@ class ProjectType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
             ])
+            ->add('archived', HiddenType::class, ['mapped' => false])
         ;
     }
 

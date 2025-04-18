@@ -13,16 +13,14 @@
         </header>
         <div id="content">
             {{ form_start(form) }}
-            <form name="projet" method="post">
                 <div>
-                {{ form_row(form.name) }}
+                    {{ form_row(form.name) }}
                 </div>
                 <div>
                     {{ form_row(form.employees) }}
                 </div>
                 <br>
-                <button class="button button-submit">Continuer</button>
-            </form>
+                <button type="submit" class="button button-submit">Continuer</button>
             {{ form_end(form) }}
         </div>
     </main>

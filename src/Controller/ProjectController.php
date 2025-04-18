@@ -18,9 +18,11 @@ final class ProjectController extends AbstractController
     {
         $project ??= new Project; //Si aucun projet passer = Nouveau si non edition
         $form = $this->createForm(ProjectType::class, $project);
-
+        $form->get('archived')->setData(false);
+        
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $entityManager->persist($project);
             $entityManager->flush();
 
