@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Project;
 use App\Form\ProjectType;
+use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class ProjectController extends AbstractController
 {
@@ -38,12 +39,34 @@ final class ProjectController extends AbstractController
         ]);
     }
 
+    #[Route('/project/{id}/archive', name: 'app_project_archive', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function projectArchive(Project $project, EntityManagerInterface $entityManager): Response
+    {
+        $project->setArchived(true);         
+        $entityManager->persist($project);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_main',[]);
+
+    }
+
     #[Route('/project/{id}', name: 'app_project', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function index(Project $project): Response
+    public function detail(Project $project): Response
     {
         return $this->render('project/project.html.twig', [
             'controller_name' => 'ProjectController',
             'project' => $project
+        ]);
+    }
+
+    #[Route('/', name: 'app_main', methods:['GET'])]
+    public function index(ProjectRepository $projectRepository): Response
+    {
+        $projects = $projectRepository->findAll();
+
+        return $this->render('main/index.html.twig', [
+            'controller_name' => 'MainController',
+            'projects' => $projects
         ]);
     }
 }
