@@ -171,7 +171,7 @@ class Employee
         return $this;
     }
 
-    public function getFullName () : string
+    public function __toString () : string
     {
         return $this-> firstname .' ' .$this-> name;
     }

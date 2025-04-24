@@ -34,7 +34,7 @@ final class TaskController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager
     ): Response {
-        dump($project);
+        
         $task ??= new Task; //Si aucune tâche passée = Nouvelle, si non edition
         $form = $this->createForm(TaskType::class, $task);
         $task->setProject($project);
