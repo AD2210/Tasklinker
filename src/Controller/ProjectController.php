@@ -33,7 +33,6 @@ final class ProjectController extends AbstractController
         }
 
         return $this->render('project/projectForm.html.twig', [
-            'controller_name' => 'ProjectController',
             'form' => $form,
             'project' => $project
         ]);
@@ -51,10 +50,9 @@ final class ProjectController extends AbstractController
     }
 
     #[Route('/project/{id}', name: 'app_project', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function detail(Project $project): Response
+    public function projectDetail(Project $project): Response
     {
         return $this->render('project/project.html.twig', [
-            'controller_name' => 'ProjectController',
             'project' => $project
         ]);
     }
@@ -64,8 +62,7 @@ final class ProjectController extends AbstractController
     {
         $projects = $projectRepository->findAll();
 
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
+        return $this->render('project/index.html.twig', [
             'projects' => $projects
         ]);
     }
