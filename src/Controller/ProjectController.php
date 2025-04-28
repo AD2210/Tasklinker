@@ -33,7 +33,6 @@ final class ProjectController extends AbstractController
         }
 
         return $this->render('project/projectForm.html.twig', [
-            'controller_name' => 'ProjectController',
             'form' => $form,
             'project' => $project
         ]);
@@ -54,7 +53,6 @@ final class ProjectController extends AbstractController
     public function projectDetail(Project $project): Response
     {
         return $this->render('project/project.html.twig', [
-            'controller_name' => 'ProjectController',
             'project' => $project
         ]);
     }
@@ -65,7 +63,6 @@ final class ProjectController extends AbstractController
         $projects = $projectRepository->findAll();
 
         return $this->render('project/index.html.twig', [
-            'controller_name' => 'MainController',
             'projects' => $projects
         ]);
     }

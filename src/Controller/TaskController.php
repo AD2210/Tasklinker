@@ -51,7 +51,6 @@ final class TaskController extends AbstractController
         }
 
         return $this->render('task/taskForm.html.twig', [
-            'controller_name' => 'ProjectController',
             'form' => $form,
             'task' => $task,
             'project' => $project
