@@ -12,7 +12,7 @@
                 <div class="user-list">
                 {# Affichage des Employées participant au project, affiche #NA si aucun affecté #}
                     {% for employee in project.employees %}
-                        <div class="avatar">{{employee.name|slice(0, 1 )|upper }}{{employee.firstname|slice(0, 1 )|upper }}</div>
+                        <div class="avatar">{{employee.firstname|slice(0, 1 )|upper }}{{employee.name|slice(0, 1 )|upper }}</div>
                     {% else %}
                         <div class="avatar">#NA</div> {# A personaliser si besoin #}
                     {% endfor %}
