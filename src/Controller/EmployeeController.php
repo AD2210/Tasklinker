@@ -33,24 +33,18 @@ final class EmployeeController extends AbstractController
         ]);
     }
 
-    #[Route('/employee/{id}/edit', name: 'app_employee_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function employeeRemove(Employee $employee, Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/employee/{id}/remove', name: 'app_employee_remove', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function employeeRemove(Employee $employee, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(EmployeeType::class, $employee);
-        
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-            $entityManager->persist($employee);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_employee');
+        if (!$employee) {
+            return $this->redirectToRoute('app_main');
         }
 
-        return $this->render('employee/employeeForm.html.twig', [
-            'form' => $form,
-            'employee' => $employee
-        ]);
+        $entityManager->remove($employee);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_employee');
+
     }
 
     #[Route('/employee', name: 'app_employee')]
