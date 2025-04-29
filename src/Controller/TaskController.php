@@ -34,7 +34,7 @@ final class TaskController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager
     ): Response {
-        dump($project);
+        
         $task ??= new Task; //Si aucune tâche passée = Nouvelle, si non edition
         $form = $this->createForm(TaskType::class, $task);
         $task->setProject($project);
@@ -51,7 +51,6 @@ final class TaskController extends AbstractController
         }
 
         return $this->render('task/taskForm.html.twig', [
-            'controller_name' => 'ProjectController',
             'form' => $form,
             'task' => $task,
             'project' => $project
