@@ -6,7 +6,6 @@ use App\Entity\Employee;
 use App\Entity\Project;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,8 +20,8 @@ class ProjectType extends AbstractType
             ->add('employees', EntityType::class, [
                 'label' => 'Inviter des membres',
                 'class' => Employee::class,
-                'choice_label' => 'name',
                 'multiple' => true,
+                'autocomplete' => true
             ])
             ->add('archived', HiddenType::class, ['mapped' => false])
         ;

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
 class Employee
@@ -16,18 +17,25 @@ class Employee
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 50)]
     private ?string $firstname = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Email]
     #[ORM\Column(length: 120)]
     private ?string $mail = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Date]
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $entry_date = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 10)]
     private ?string $status = null;
 
@@ -169,5 +177,10 @@ class Employee
         }
 
         return $this;
+    }
+
+    public function __toString () : string
+    {
+        return $this-> firstname .' ' .$this-> name;
     }
 }
