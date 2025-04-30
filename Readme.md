@@ -47,7 +47,7 @@ symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate
 ```
 
-6 - ** Optionnel ** Charger les Fixtures avec la commande
+6 - **Optionnel** Charger les Fixtures avec la commande
 
 ```bash
 symfony console doctrine:fixtures:load 
