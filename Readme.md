@@ -23,13 +23,14 @@ composer install
 
 3 - Parametrer votre BDD
 
-    3.1 - Vérifier dans votre php.ini que le driver dont vous avez besoin est bien activé 
-        **exemple :** si vous utiliser Mysql, vérifier que cette ligne est decommenté
+3.1 - Vérifier dans votre php.ini que le driver dont vous avez besoin est bien activé 
+    **exemple :** si vous utiliser Mysql, vérifier que cette ligne est decommenté
         
 `extension=pdo_mysql`
 
-    3.2 - Copier le fichier _.env_ et renommer le en _.env.local_  
-    3.3 - Parametrer votre connexion à l'aide de la ligne correspondante a votre BDD
+3.2 - Copier le fichier _.env_ et renommer le en _.env.local_
+
+3.3 - Parametrer votre connexion à l'aide de la ligne correspondante a votre BDD
 
 `DATABASE_URL="mysql://!identifiant!:!motdepasse!@!ipconnexion!:!port!/!nomBDD!?serverVersion=!Version!&charset=utf8mb4`
 
