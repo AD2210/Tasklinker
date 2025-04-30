@@ -6,9 +6,9 @@ TaskLinker est une application de gestion de projet interne pour BeWize
 ## Versions Utilisées
 
 Ce projet a été developper avec Symfony 7.2.5 sous php 8.4,
-toutes versions antérieures ne garanties pas le focntionnement de l'application
+toutes versions antérieures ne garanties pas le fonctionnement de l'application
 
-La base de donnée utilisé est une MariaDB 10.4.5 lors du developpement,
+La base de donnée utilisée est une MariaDB 10.4.5 lors du developpement,
 tout autre base SRGBR est possible, voir plus bas pour la configuration
 
 ## Installation
@@ -63,4 +63,4 @@ symfony serve -d
 
 ## License
 
-Ce projet est réaliser dans le cadre d'une formation OpenClassroom
+Ce projet est réalisé dans le cadre d'une formation OpenClassroom
