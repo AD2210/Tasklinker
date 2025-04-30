@@ -31,7 +31,6 @@ class Employee
     private ?string $mail = null;
 
     #[Assert\NotBlank]
-    #[Assert\Date]
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $entry_date = null;
 

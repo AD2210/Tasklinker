@@ -19,7 +19,6 @@ class Task
     #[ORM\Column(length: 120)]
     private ?string $title = null;
 
-    #[Assert\Date]
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $deadline = null;
 
