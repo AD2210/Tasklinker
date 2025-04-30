@@ -3,25 +3,19 @@
 {% set action = app.current_route == 'app_project_new' ? 'Nouveau Projet' : (project.name) %}
 {% block title %}{{ action }} - {{ parent()}}{% endblock %}
 
+{% block header %}
+    <h1>{{ action }}</h1>
+{% endblock %}
+                
 {% block body %}
-    <main>
-        <header>
-            <div id="current-user"></div>
-            <div id="title-page">
-                <h1>{{ action }}</h1>
-            </div>
-        </header>
-        <div id="content">
-            {{ form_start(form) }}
-                <div>
-                    {{ form_row(form.name) }}
-                </div>
-                <div>
-                    {{ form_row(form.employees) }}
-                </div>
-                <br>
-                <button type="submit" class="button button-submit">Continuer</button>
-            {{ form_end(form) }}
+    {{ form_start(form) }}
+        <div>
+            {{ form_row(form.name) }}
         </div>
-    </main>
+        <div>
+            {{ form_row(form.employees) }}
+        </div>
+        <br>
+        <button type="submit" class="button button-submit">Continuer</button>
+    {{ form_end(form) }}
 {% endblock %}

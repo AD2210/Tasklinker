@@ -4,27 +4,22 @@
 {% set buttonAction = app.current_route == 'app_task_new' ? 'Ajouter' : 'Modifier' %}
 {% block title %}{{ action }} - {{ parent()}}{% endblock %}
 
+
+{% block header %}
+    <h1>{{action}}</h1>
+{% endblock %}
+       
 {% block body %}
-    <main>
-        <header>
-               <div id="current-user"></div>
-               <div id="title-page">
-                  <h1>{{action}}</h1>
-               </div>
-            </header>
-            <div id="content">
-               {{ form_start(form) }}
-                    {{ form_row(form.title) }}
-                    {{ form_row(form.description) }}
-                    {{ form_row(form.deadline) }}
-                    {{ form_row(form.status) }}
-                    {{ form_row(form.employee) }}
-                    <br>
-                    <button type="submit" class="button button-submit">{{buttonAction}}</button>
-                    {% if app.current_route == 'app_task_edit' %}
-                        <a href="{{path('app_task_remove', {task_id: task.id, project_id: project.id})}}" class="delete-task">Supprimer la tâche</a>    
-                    {% endif %}
-                {{ form_end(form) }}
-             </div>
-         </main>
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.deadline) }}
+        {{ form_row(form.status) }}
+        {{ form_row(form.employee) }}
+        <br>
+        <button type="submit" class="button button-submit">{{buttonAction}}</button>
+        {% if app.current_route == 'app_task_edit' %}
+            <a href="{{path('app_task_remove', {task_id: task.id, project_id: project.id})}}" class="delete-task">Supprimer la tâche</a>    
+        {% endif %}
+    {{ form_end(form) }}
 {% endblock %}
