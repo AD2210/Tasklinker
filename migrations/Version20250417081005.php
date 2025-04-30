@@ -36,7 +36,7 @@ final class Version20250417081005 extends AbstractMigration
             ALTER TABLE task ADD CONSTRAINT FK_527EDB25166D1F9C FOREIGN KEY (project_id) REFERENCES project (id)
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE task ADD CONSTRAINT FK_527EDB258C03F15C FOREIGN KEY (employee_id) REFERENCES employee (id)
+            ALTER TABLE task ADD CONSTRAINT FK_527EDB258C03F15C FOREIGN KEY (employee_id) REFERENCES employee (id) ON DELETE SET NULL
         SQL);
         $this->addSql(<<<'SQL'
             CREATE INDEX IDX_527EDB25166D1F9C ON task (project_id)
