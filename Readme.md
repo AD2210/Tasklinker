@@ -26,38 +26,38 @@ composer install
     3.1 - Vérifier dans votre php.ini que le driver dont vous avez besoin est bien activé 
         **exemple :** si vous utiliser Mysql, vérifier que cette ligne est decommenté
         
-            `extension=pdo_mysql`
+`extension=pdo_mysql`
 
     3.2 - Copier le fichier _.env_ et renommer le en _.env.local_  
     3.3 - Parametrer votre connexion à l'aide de la ligne correspondante a votre BDD
 
-            `DATABASE_URL="mysql://!identifiant!:!motdepasse!@!ipconnexion!:!port!/!nomBDD!?serverVersion=!Version!&charset=utf8mb4`
+`DATABASE_URL="mysql://!identifiant!:!motdepasse!@!ipconnexion!:!port!/!nomBDD!?serverVersion=!Version!&charset=utf8mb4`
 
 4 - Démarer votre système de base de donnée puis créer la base à l'aide de la commande
 
-    ```bash
-    symfony console doctrine:database:create
-    ```
+```bash
+symfony console doctrine:database:create
+```
 
 5 - Migrer le schéma de la base avec la commande
 
-    ```bash
-    symfony console doctrine:migrations:migrate
-    ```
+```bash
+symfony console doctrine:migrations:migrate
+```
 
 6 - ** Optionnel ** Charger les Fixtures avec la commande
 
-    ```bash
-    symfony console doctrine:fixtures:load 
-    ```
+```bash
+symfony console doctrine:fixtures:load 
+```
 
 ## Usage
 
 Démarer votre serveur symfony
 
-    ```bash
-    symfony serve -d
-    ```
+```bash
+symfony serve -d
+```
 
 ## License
 
