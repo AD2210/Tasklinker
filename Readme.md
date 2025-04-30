@@ -23,8 +23,9 @@ composer install
 
 3 - Parametrer votre BDD
 
-3.1 - Vérifier dans votre php.ini que le driver dont vous avez besoin est bien activé 
-    **exemple :** si vous utiliser Mysql, vérifier que cette ligne est decommenté
+3.1 - Vérifier dans votre php.ini que le driver dont vous avez besoin est bien activé
+
+**exemple :** si vous utiliser Mysql, vérifier que cette ligne est decommenté
         
 `extension=pdo_mysql`
 
