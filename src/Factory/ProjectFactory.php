@@ -2,9 +2,7 @@
 
 namespace App\Factory;
 
-use App\Entity\Employee;
 use App\Entity\Project;
-use App\Repository\EmployeeRepository;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**

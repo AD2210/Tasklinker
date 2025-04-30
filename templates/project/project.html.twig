@@ -2,116 +2,53 @@
 
 {% block title %}{{project.name}} - {{ parent()}}{% endblock %}
 
-{% block body %}
-<main>
-    <header>
-        <div id="current-user"></div>
-        <div id="title-page">
-            <div class="flex-header">
-                <h1>{{project.name}}</h1>
-                <div class="user-list">
-                {# Affichage des Employées participant au project, affiche #NA si aucun affecté #}
-                    {% for employee in project.employees %}
-                        <div class="avatar">{{employee.firstname|slice(0, 1 )|upper }}{{employee.name|slice(0, 1 )|upper }}</div>
-                    {% else %}
-                        <div class="avatar">#NA</div> {# A personaliser si besoin #}
-                    {% endfor %}
-                    
-                </div>
-                <a class="button" href="{{path ('app_project_edit', {id: project.id})}}">Modifier</a>
-            </div>
+{% block header %}
+    <div class="flex-header">
+        <h1>{{project.name}}</h1>
+        <div class="user-list">
+        {# Affichage des Employées participant au project, affiche #NA si aucun affecté #}
+            {% for employee in project.employees %}
+                <div class="avatar">{{employee.firstname|slice(0, 1 )|upper }}{{employee.name|slice(0, 1 )|upper }}</div>
+            {% else %}
+                <div class="avatar">#NA</div> {# A personaliser si besoin #}
+            {% endfor %}
         </div>
-    </header>
-    <div id="content">
-        <div id="tasks-container">
-            <div class="task-column">
-                <h2>To Do</h2>
-                <div class="tasks-list">
-                {% for toDoTask in project.tasks %}
-                    {% if toDoTask.status == 'To Do' %}
-                        <a class="task" href="{{path('app_task_edit', {project_id: project.id, task_id: toDoTask.id})}}">
-                            <h3>{{toDoTask.title}}</h3>
-                            <p>{{toDoTask.description}}</p>
-                            <div class="task-infos">
-                                {% if toDoTask.deadline is not null %}
-                                    <div class="task-deadline">
-                                        <i class="fa-regular fa-calendar"></i>
-                                        {{toDoTask.deadline|date("d/m/y")}}
-                                    </div>    
-                                {% endif %}
-                                {% if toDoTask.employee is not null %}
-                                    <div class="mini-user">
-                                        {{toDoTask.employee.name|slice(0, 1 )|upper }}{{toDoTask.employee.firstname|slice(0, 1 )|upper }}
-                                    </div>  
-                                {% endif %}
-                            </div>
-                        </a>    
-                    {% endif %}
-                {% endfor %}
-                <a href="{{path('app_task_new', {project_id: project.id})}}" class="task-add">
-                + Ajouter une tâche
-                </a>
-                </div>
-            </div>
-            <div class="task-column">
-                <h2>Doing</h2>
-                <div class="tasks-list">
-                {% for doingTask in project.tasks %}
-                    {% if doingTask.status == 'Doing' %}
-                        <a class="task" href="{{path('app_task_edit', {task_id: doingTask.id, project_id: project.id})}}">
-                            <h3>{{doingTask.title}}</h3>
-                            <p>{{doingTask.description}}</p>
-                            <div class="task-infos">
-                                {% if doingTask.deadline is not null %}
-                                    <div class="task-deadline">
-                                        <i class="fa-regular fa-calendar"></i>
-                                        {{doingTask.deadline|date("d/m/y")}}
-                                    </div>    
-                                {% endif %}
-                                {% if doingTask.employee is not null %}
-                                    <div class="mini-user">
-                                        {{doingTask.employee.name|slice(0, 1 )|upper }}{{doingTask.employee.firstname|slice(0, 1 )|upper }}
-                                    </div>  
-                                {% endif %}
-                            </div>
-                        </a>    
-                    {% endif %}
-                {% endfor %}
-                <a href="{{path('app_task_new', {project_id: project.id})}}" class="task-add">
-                + Ajouter une tâche
-                </a>
-                </div>
-            </div>
-            <div class="task-column">
-                <h2>Done</h2>
-                <div class="tasks-list">
-                {% for doneTask in project.tasks %}
-                    {% if doneTask.status == 'Done' %}
-                        <a class="task" href="{{path('app_task_edit', {task_id: doneTask.id, project_id: project.id})}}">
-                            <h3>{{doneTask.title}}</h3>
-                            <p>{{doneTask.description}}</p>
-                            <div class="task-infos">
-                                {% if doneTask.deadline is not null %}
-                                    <div class="task-deadline">
-                                        <i class="fa-regular fa-calendar"></i>
-                                        {{doneTask.deadline|date("d/m/y")}}
-                                    </div>    
-                                {% endif %}
-                                {% if doneTask.employee is not null %}
-                                    <div class="mini-user">
-                                        {{doneTask.employee.name|slice(0, 1 )|upper }}{{doneTask.employee.firstname|slice(0, 1 )|upper }}
-                                    </div>  
-                                {% endif %}
-                            </div>
-                        </a>    
-                    {% endif %} 
-                {% endfor %}
-                <a href="{{path('app_task_new', {project_id: project.id})}}" class="task-add">
-                + Ajouter une tâche
-                </a>
-                </div>
-            </div>
-        </div>
+        <a class="button" href="{{path ('app_project_edit', {id: project.id})}}">Modifier</a>
     </div>
-</main>
+{% endblock %}
+            
+{% block body %}
+{% set status = ['To Do', 'Doing', 'Done'] %}
+    <div id="tasks-container">
+    {% for selectedStatus in status %}
+        <div class="task-column">
+            <h2>{{selectedStatus}}</h2>
+            <div class="tasks-list">
+            {% for task in project.tasks %}
+                {% if task.status == selectedStatus %}
+                    <a class="task" href="{{path('app_task_edit', {project_id: project.id, task_id: task.id})}}">
+                        <h3>{{task.title}}</h3>
+                        <p>{{task.description}}</p>
+                        <div class="task-infos">
+                            {% if task.deadline is not null %}
+                                <div class="task-deadline">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    {{task.deadline|date("d/m/y")}}
+                                </div>    
+                            {% endif %}
+                            {% if task.employee is not null %}
+                                <div class="mini-user">
+                                    {{task.employee.name|slice(0, 1 )|upper }}{{task.employee.firstname|slice(0, 1 )|upper }}
+                                </div>  
+                            {% endif %}
+                        </div>
+                    </a>    
+                {% endif %}
+            {% endfor %}
+            <a href="{{path('app_task_new', {project_id: project.id})}}" class="task-add">
+            + Ajouter une tâche
+            </a>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
