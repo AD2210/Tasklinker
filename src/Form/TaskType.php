@@ -2,16 +2,18 @@
 
 namespace App\Form;
 
-use App\Entity\Employee;
 use App\Entity\Task;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Project;
+use App\Entity\Employee;
+use App\Repository\EmployeeRepository;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class TaskType extends AbstractType
 {
@@ -44,6 +46,14 @@ class TaskType extends AbstractType
                 'required' => false,
                 'label' => 'Membre',
                 'class' => Employee::class,
+                'query_builder' => function (EmployeeRepository $employeeRepository) use ($options) {
+                    $project = $options['project'];
+
+                    return $employeeRepository->createQueryBuilder('e')
+                        ->innerJoin('e.projects', 'p')
+                        ->andWhere('p = :proj')
+                        ->setParameter('proj', $project);
+                },
             ])
         ;
     }
@@ -52,6 +62,10 @@ class TaskType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Task::class,
+            'project'    => null,
         ]);
+
+        // on exige que 'project' soit un Project ou null
+        $resolver->setAllowedTypes('project', [Project::class, 'null']);
     }
 }

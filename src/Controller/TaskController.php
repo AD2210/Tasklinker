@@ -36,8 +36,12 @@ final class TaskController extends AbstractController
     ): Response {
         
         $task ??= new Task; //Si aucune tâche passée = Nouvelle, si non edition
-        $form = $this->createForm(TaskType::class, $task);
         $task->setProject($project);
+        $form = $this->createForm(TaskType::class, $task, [
+            // on passe le project en parametre du formulaire pour selectionner uniquement les employés affecté au project
+            'project' => $project,
+        ]);
+        
 
         
         $form->handleRequest($request);
