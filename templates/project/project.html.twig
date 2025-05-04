@@ -38,7 +38,7 @@
                             {% endif %}
                             {% if task.employee is not null %}
                                 <div class="mini-user">
-                                    {{task.employee.name|slice(0, 1 )|upper }}{{task.employee.firstname|slice(0, 1 )|upper }}
+                                    {{task.employee.firstname|slice(0, 1 )|upper }}{{task.employee.name|slice(0, 1 )|upper }}
                                 </div>  
                             {% endif %}
                         </div>
