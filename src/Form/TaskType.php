@@ -6,6 +6,7 @@ use App\Entity\Task;
 use App\Entity\Project;
 use App\Entity\Employee;
 use App\Repository\EmployeeRepository;
+use Doctrine\DBAL\Types\StringType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -40,7 +41,7 @@ class TaskType extends AbstractType
                     'To Do' => 'To Do',
                     'Doing' => 'Doing',
                     'Done' => 'Done'
-                ]
+                ],
             ])
             ->add('employee', EntityType::class, [
                 'required' => false,

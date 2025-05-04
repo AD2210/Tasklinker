@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class TaskController extends AbstractController
 {
     #[Route(
-        'project/{project_id}/task/new',
+        'project/{project_id}/task/new/{task_status}',
         name: 'app_task_new',
         requirements: ['project_id' => '\d+'],
         methods: ['GET', 'POST']
@@ -29,6 +29,7 @@ final class TaskController extends AbstractController
     public function taskEdition(
         #[MapEntity(id: 'task_id')]
         ?Task $task,
+        ?string $task_status,
         #[MapEntity(id: 'project_id')]
         Project $project,
         Request $request,
@@ -37,6 +38,7 @@ final class TaskController extends AbstractController
         
         $task ??= new Task; //Si aucune tâche passée = Nouvelle, si non edition
         $task->setProject($project);
+        $task->setStatus($task_status);
         $form = $this->createForm(TaskType::class, $task, [
             // on passe le project en parametre du formulaire pour selectionner uniquement les employés affecté au project
             'project' => $project,
