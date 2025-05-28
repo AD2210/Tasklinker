@@ -6,14 +6,11 @@ use App\Entity\Task;
 use App\Form\TaskType;
 use App\Entity\Project;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-use function PHPUnit\Framework\isNull;
 
 final class TaskController extends AbstractController
 {
