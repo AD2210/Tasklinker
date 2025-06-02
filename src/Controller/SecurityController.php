@@ -9,6 +9,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    #[Route(path: '/', name: 'app_dispatch')] //Home page to dispatch login or registration
+    public function dispatch(): Response
+    {
+        return $this->render('security/dispatch.html.twig');
+    }
+    
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {

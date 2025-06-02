@@ -11,10 +11,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/project', name: 'app_project_', methods: ['GET', 'POST'])]
 final class ProjectController extends AbstractController
 {
-    #[Route('/project/new', name: 'app_project_new', methods: ['GET', 'POST'])]
-    #[Route('/project/{id}/edit', name: 'app_project_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function projectEdition(?Project $project, Request $request, EntityManagerInterface $entityManager): Response
     {
         $project ??= new Project; //Si aucun projet passé = Nouveau, si non edition
@@ -38,7 +39,7 @@ final class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/project/{id}/archive', name: 'app_project_archive', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/{id}/archive', name: 'archive', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function projectArchive(Project $project, EntityManagerInterface $entityManager): Response
     {
         $project->setArchived(true);         
@@ -49,7 +50,7 @@ final class ProjectController extends AbstractController
 
     }
 
-    #[Route('/project/{id}', name: 'app_project', requirements: ['id' => '\d+'], methods: ['GET'])]
+    #[Route('/{id}', name: 'project', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function projectDetail(Project $project): Response
     {
         return $this->render('project/project.html.twig', [
@@ -57,7 +58,7 @@ final class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'app_main', methods:['GET'])]
+    #[Route('/index', name: 'index', methods:['GET'])]
     public function index(ProjectRepository $projectRepository): Response
     {
         $projects = $projectRepository->findAll();

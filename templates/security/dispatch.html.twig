@@ -1,0 +1,18 @@
+{% extends 'baseSecurity.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <div>
+        <div>
+            <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
+            <h3>Commencez dès maintenant - gratuitement</h3>
+        </div>
+        <div> {# Class à mettre pour flexbox, boutons #}
+            <p>Vous avez déjà un compte ?</p>
+            <div><a href="{{ path('app_login') }}">Se connecter</a></div>
+            <p>———————————— ou ————————————</p>
+            <div><a href="{{ path('app_register') }}">S’inscrire</a></div>
+        </div>
+    </div>
+{% endblock %}
