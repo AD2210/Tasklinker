@@ -22,7 +22,7 @@ class EmployeeType extends AbstractType
             ->add('firstname', TextType::class,[
                 'label' => 'Prénom'
             ])
-            ->add('mail', EmailType::class, [
+            ->add('email', EmailType::class, [
                 'label' => 'Email'
             ])
             ->add('entry_date', DateType::class,[

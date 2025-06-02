@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/employee', name: 'app_employee_')]
+#[Route('/employee', name: 'app_')]
 final class EmployeeController extends AbstractController
 {
-    #[Route('/{id}/edit', name: 'edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'employee_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function employeeEdition(Employee $employee, Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(EmployeeType::class, $employee);
@@ -34,7 +34,7 @@ final class EmployeeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/remove', name: 'remove', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/{id}/remove', name: 'employee_remove', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function employeeRemove(Employee $employee, EntityManagerInterface $entityManager): Response
     {
         if (!$employee) {
@@ -48,7 +48,7 @@ final class EmployeeController extends AbstractController
 
     }
 
-    #[Route('/')]
+    #[Route('/', name: 'employee')]
     public function index(EmployeeRepository $employeeRepository): Response
     {
         $employees = $employeeRepository->findAll();
