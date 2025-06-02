@@ -46,7 +46,7 @@ final class ProjectController extends AbstractController
         $entityManager->persist($project);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_main',[]);
+        return $this->redirectToRoute('app_project_index',[]);
 
     }
 

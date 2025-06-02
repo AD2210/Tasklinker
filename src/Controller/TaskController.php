@@ -12,17 +12,18 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('project/{project_id}/task',name: 'app_task_')]
 final class TaskController extends AbstractController
 {
     #[Route(
-        'project/{project_id}/task/new/{task_status}',
-        name: 'app_task_new',
+        '/new/{task_status}',
+        name: 'new',
         requirements: ['project_id' => '\d+'],
         methods: ['GET', 'POST']
     )]
     #[Route(
-        'project/{project_id}/task/{task_id}/edit',
-        name: 'app_task_edit',
+        '/{task_id}/edit',
+        name: 'edit',
         requirements: ['project_id' => '\d+', 'task_id' => '\d+'],
         methods: ['GET', 'POST']
     )]
@@ -69,8 +70,8 @@ final class TaskController extends AbstractController
     }
 
     #[Route(
-        'project/{project_id}/task/{task_id}/remove',
-        name: 'app_task_remove',
+        '/{task_id}/remove',
+        name: 'remove',
         requirements: ['project_id' => '\d+', 'task_id' => '\d+'],
         methods: ['GET', 'POST']
     )]
@@ -82,7 +83,7 @@ final class TaskController extends AbstractController
         EntityManagerInterface $entityManager,
     ): Response {
         if (!$task) {
-            return $this->redirectToRoute('app_main');
+            return $this->redirectToRoute('app_project_index');
         }
 
         $entityManager->remove($task);
