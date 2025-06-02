@@ -15,12 +15,12 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
+    <body class="security-body">
         <main>
             <a href="{{ path('app_dispatch') }}" id="logo">
                 <img src="{{asset ('img/logo.png')}}" alt="Logo TaskLinker" />
             </a>
-            <div id="main-container">
+            <div id="security-main-container">
                 <div id="content">
                     {% block body %}{% endblock %}
                 </div>

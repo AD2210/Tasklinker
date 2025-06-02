@@ -12,13 +12,14 @@
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.name) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword.first) }}
-        {{ form_row(registrationForm.plainPassword.second) }}
-
-        <button type="submit" class="btn">Continuer</button>
-        <a href="{{ path('app_login') }}">Vous avez déjà un compte ?</a>
+            {{ form_row(registrationForm.name) }}
+            {{ form_row(registrationForm.firstname) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword.first) }}
+            {{ form_row(registrationForm.plainPassword.second) }}
+        <button type="submit" class="button button-submit">Continuer</button>
+        <div class="register-link">
+            <a class="security-link" href="{{ path('app_login') }}">Vous avez déjà un compte ?</a>
+        </div>
     {{ form_end(registrationForm) }}
 {% endblock %}

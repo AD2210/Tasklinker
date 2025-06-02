@@ -3,16 +3,16 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <div>
-        <div>
-            <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
+    <div class="dispatch-container">
+        <div class="dispatch-content">
+            <h1 class="security-title">Bienvenue sur TaskLinker</h1>
             <h3>Commencez dès maintenant - gratuitement</h3>
         </div>
-        <div> {# Class à mettre pour flexbox, boutons #}
+        <div class="dispatch-content"> {# Class à mettre pour flexbox, boutons #}
             <p>Vous avez déjà un compte ?</p>
-            <div><a href="{{ path('app_login') }}">Se connecter</a></div>
-            <p>———————————— ou ————————————</p>
-            <div><a href="{{ path('app_register') }}">S’inscrire</a></div>
+            <div><a class="button button-edit-team" href="{{ path('app_login') }}">Se connecter</a></div>
+            <p>⸻⸺⸺ &nbsp &nbsp ou &nbsp &nbsp  ⸺⸻⸺</p>  
+            <div><a class="button button-signin" href="{{ path('app_register') }}">S’inscrire</a></div>
         </div>
     </div>
 {% endblock %}
