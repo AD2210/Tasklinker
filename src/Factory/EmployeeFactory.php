@@ -38,7 +38,7 @@ final class EmployeeFactory extends PersistentProxyObjectFactory
             'firstname' => self::faker()->firstName(),
             'email' => self::faker()->unique()->companyEmail(),
             'password' => 'password123',
-            'roles' => self::faker()->randomElement(['ROLE_USER', 'ROLE_ADMIN']),
+            'roles' => self::faker()->randomElement([['ROLE_USER'], ['ROLE_ADMIN']]),
             'name' => self::faker()->lastName(),
             'status' => self::faker()->randomElement(['CDI', 'CDD', 'Freelance']),
         ];
