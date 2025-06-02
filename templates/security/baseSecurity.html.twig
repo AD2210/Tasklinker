@@ -15,36 +15,16 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
-        <div id="main-container">
-            <nav>
-                <a href="{{ path('app_project_index') }}" id="logo">
+    <body class="security-body">
+        <main>
+            <a href="{{ path('app_dispatch') }}" id="logo">
                 <img src="{{asset ('img/logo.png')}}" alt="Logo TaskLinker" />
-                </a>
-                <ul id="main-menu">
-                <li class="active">
-                    <a href="{{ path('app_project_index') }}">
-                    <i class="fa-solid fa-list-check"></i> Projets
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('app_employee') }}">
-                    <i class="fa-regular fa-user"></i> Équipe
-                    </a>
-                </li>
-                </ul>
-            </nav>
-            <main>
-                <header>
-                    <div id="title-page">
-                        {% block header %}{% endblock %}
-                    </div>
-                    <div id="current-user">ND</div>
-                </header>
+            </a>
+            <div id="security-main-container">
                 <div id="content">
                     {% block body %}{% endblock %}
                 </div>
+            </div>
         </main>  
-      </div>
     </body>
 </html>
