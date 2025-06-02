@@ -85,6 +85,11 @@ a.button-signin {
     font-weight: 700;
 }
 
+.security-body #security-main-container #content .dispatch-content h1 {
+    margin: 0;
+    padding: 0;
+}
+
 .dispatch-content h3{
     font-size: 22px;
     font-weight: 400;
