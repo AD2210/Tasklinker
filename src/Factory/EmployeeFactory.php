@@ -3,6 +3,8 @@
 namespace App\Factory;
 
 use App\Entity\Employee;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
@@ -15,7 +17,9 @@ final class EmployeeFactory extends PersistentProxyObjectFactory
      *
      * 
      */
-    public function __construct() {}
+    public function __construct(private UserPasswordHasherInterface $passwordHasher) {
+        parent::__construct();
+    }
 
     public static function class(): string
     {
@@ -32,9 +36,9 @@ final class EmployeeFactory extends PersistentProxyObjectFactory
         return [
             'entry_date' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeThisDecade()),
             'firstname' => self::faker()->firstName(),
-            'email' => self::faker()->companyEmail(),
+            'email' => self::faker()->unique()->companyEmail(),
             'password' => 'password123',
-            'roles' => ['ROLE_USER'],
+            'roles' => self::faker()->randomElement(['ROLE_USER', 'ROLE_ADMIN']),
             'name' => self::faker()->lastName(),
             'status' => self::faker()->randomElement(['CDI', 'CDD', 'Freelance']),
         ];
@@ -46,7 +50,9 @@ final class EmployeeFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Employee $employee): void {})
+            ->afterInstantiate(function(Employee $employee): void {
+                $employee->setPassword($this->passwordHasher->hashPassword($employee, $employee->getPassword()));
+            })
         ;
     }
 }
