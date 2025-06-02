@@ -60,6 +60,7 @@ final class ProjectController extends AbstractController
     #[Route('/{id}', name: 'project', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function projectDetail(Project $project): Response
     {
+        $this->denyAccessUnlessGranted('project.is_member',$project);
         return $this->render('project/project.html.twig', [
             'project' => $project
         ]);

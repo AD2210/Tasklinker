@@ -28,6 +28,10 @@ class ProjectEditVoter extends Voter
             return false;
         }
 
+        if(in_array('ROLE_ADMIN',$user->getRoles(),true)){
+            return true; //Autorise l'accès aux admins même s'il ne sont pas rattaché au projet
+        }
+
         /** @var Project $subject */
         // On vérifie si l'utilisateur connecté est présent dans la liste des employés affectés au projet afin de lui donné accès
         foreach ($subject->getEmployees() as $employee) {
