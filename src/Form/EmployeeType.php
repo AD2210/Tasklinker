@@ -37,6 +37,13 @@ class EmployeeType extends AbstractType
                     'Freelance' => 'Freelance'
                 ]
             ])
+            ->add('admin', ChoiceType::class,[
+                'label' => 'Rôle',
+                'choices' => [
+                    'collaborateur' => false,
+                    'Chef de projet' => true
+                ]
+            ])
         ;
     }
 

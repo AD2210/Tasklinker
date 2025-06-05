@@ -256,9 +256,9 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function __toString () : string
+    public function __toString(): string
     {
-        return $this-> firstname .' ' .$this-> name;
+        return $this->firstname . ' ' . $this->name;
     }
 
     public function isVerified(): bool
@@ -270,6 +270,17 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->isVerified = $isVerified;
 
+        return $this;
+    }
+
+    // methodes pour convertir l'array role en bool (car 2 roles) si non utiliser un int
+    public function isAdmin(): bool
+    {
+        return in_array('ROLE_ADMIN', $this->roles);
+    }
+
+    public function setAdmin(bool $admin): static {
+        $this->roles = $admin ? ['ROLE_ADMIN'] : ['ROLE_USER'];
         return $this;
     }
 }
