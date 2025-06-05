@@ -1,0 +1,18 @@
+{% extends 'security/baseSecurity.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <div class="dispatch-container">
+        <div class="dispatch-content">
+            <h1 class="security-title">Bienvenue sur TaskLinker</h1>
+            <h3>Commencez dès maintenant - gratuitement</h3>
+        </div>
+        <div class="dispatch-content"> {# Class à mettre pour flexbox, boutons #}
+            <p>Vous avez déjà un compte ?</p>
+            <div><a class="button button-edit-team" href="{{ path('app_login') }}">Se connecter</a></div>
+            <p>⸻⸺⸺ &nbsp &nbsp ou &nbsp &nbsp  ⸺⸻⸺</p>  
+            <div><a class="button button-signin" href="{{ path('app_register') }}">S’inscrire</a></div>
+        </div>
+    </div>
+{% endblock %}

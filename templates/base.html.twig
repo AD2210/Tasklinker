@@ -18,16 +18,16 @@
     <body>
         <div id="main-container">
             <nav>
-                <a href="{{ path('app_main') }}" id="logo">
+                <a href="{{ path('app_project_index') }}" id="logo">
                 <img src="{{asset ('img/logo.png')}}" alt="Logo TaskLinker" />
                 </a>
                 <ul id="main-menu">
-                <li class="active">
-                    <a href="{{ path('app_main') }}">
+                <li{% if app.request.attributes.get( '_route' ) starts with 'app_project' or app.request.attributes.get( '_route' ) starts with 'app_task' %} class="active"{% endif %}>
+                    <a href="{{ path('app_project_index') }}">
                     <i class="fa-solid fa-list-check"></i> Projets
                     </a>
                 </li>
-                <li>
+                <li{% if app.request.attributes.get( '_route' ) starts with 'app_employee' %} class="active"{% endif %}>
                     <a href="{{ path('app_employee') }}">
                     <i class="fa-regular fa-user"></i> Équipe
                     </a>
@@ -36,8 +36,8 @@
             </nav>
             <main>
                 <header>
-                    <div id="current-user"></div>
                     <div id="title-page">
+                    <a class="logged-user" href="{{ path('app_logout') }}" ><div class="avatar">{{app.user.firstname|slice(0, 1 )|upper }}{{app.user.name|slice(0, 1 )|upper }}</div></a>
                         {% block header %}{% endblock %}
                     </div>
                 </header>
