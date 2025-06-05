@@ -5,9 +5,6 @@
 {% block body %}
     
     <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
 
         {# Bloc inutile car géré dans le controller
         {% if app.user %}
@@ -25,7 +22,10 @@
         <div class="form-field">
             <label for="password">Mot de passe</label>
             <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-        </div>  
+        </div>
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(arguments = error.messageData , domain = 'security', locale = 'fr_FR') }}</div>
+        {% endif %}
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"
         >
