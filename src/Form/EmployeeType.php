@@ -40,7 +40,7 @@ class EmployeeType extends AbstractType
             ->add('admin', ChoiceType::class,[
                 'label' => 'Rôle',
                 'choices' => [
-                    'collaborateur' => false,
+                    'Collaborateur' => false,
                     'Chef de projet' => true
                 ]
             ])
