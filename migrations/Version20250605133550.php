@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250417075941 extends AbstractMigration
+final class Version20250605133550 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,7 +21,7 @@ final class Version20250417075941 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            CREATE TABLE task (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(120) NOT NULL, deadline DATE DEFAULT NULL, description LONGTEXT DEFAULT NULL, status VARCHAR(10) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
+            ALTER TABLE employee ADD google_authenticator_secret VARCHAR(255) NOT NULL
         SQL);
     }
 
@@ -29,7 +29,7 @@ final class Version20250417075941 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            DROP TABLE task
+            ALTER TABLE employee DROP google_authenticator_secret
         SQL);
     }
 }

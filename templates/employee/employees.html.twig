@@ -10,6 +10,7 @@
             <tr>
             <th>Prénom, Nom</th>
             <th>Statut</th>
+            <th>Rôle</th>
             <th>Actions</th>
             </tr>
         </thead>
@@ -23,11 +24,18 @@
                             </div>
                             <div class="employee-coords">
                                 <strong>{{employee.firstname}} {{employee.name}}</strong>
-                                <span>{{employee.mail}}</span>
+                                <span>{{employee.email}}</span>
                             </div>
                         </div>
                     </td>
                     <td>{{employee.status}}</td>
+                    <td>
+                        {% if employee.admin == 1 %}
+                            Chef de projet
+                        {% else %}
+                            Collaborateur
+                        {% endif %}
+                    </td>
                     <td>
                         <a class="button button-edit-team" href="{{path('app_employee_edit', {id: employee.id})}}">
                         Éditer

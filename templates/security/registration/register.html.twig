@@ -1,0 +1,25 @@
+{% extends 'security/baseSecurity.html.twig' %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1>S’inscrire</h1>
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.name) }}
+            {{ form_row(registrationForm.firstname) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword.first) }}
+            {{ form_row(registrationForm.plainPassword.second) }}
+        <button type="submit" class="button button-submit">Continuer</button>
+        <div class="register-link">
+            <a class="security-link" href="{{ path('app_login') }}">Vous avez déjà un compte ?</a>
+        </div>
+    {{ form_end(registrationForm) }}
+{% endblock %}
