@@ -29,6 +29,9 @@ composer install
         
 `extension=pdo_mysql`
 
+Extensions permettant de générer les images (pour le Qr Code)
+`extension=gd`
+
 3.2 - Copier le fichier _.env_ et renommer le en _.env.local_
 
 3.3 - Parametrer votre connexion à l'aide de la ligne correspondante a votre BDD
@@ -60,6 +63,9 @@ Démarer votre serveur symfony
 ```bash
 symfony serve -d
 ```
+
+Pour vous logger, voir dans la base une fois les fixtures créés les adresses mails générées en fonction du rôle souhaité
+mot de passe : `password123`
 
 ## License
 
