@@ -64,6 +64,9 @@ Démarer votre serveur symfony
 symfony serve -d
 ```
 
+Pour vous logger, voir dans la base une fois les fixtures créés les adresses mails générées en fonction du rôle souhaité
+mot de passe : `password123`
+
 ## License
 
 Ce projet est réalisé dans le cadre d'une formation OpenClassroom
