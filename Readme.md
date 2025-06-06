@@ -29,6 +29,9 @@ composer install
         
 `extension=pdo_mysql`
 
+Extensions permettant de générer les images (pour le Qr Code)
+`extension=gd`
+
 3.2 - Copier le fichier _.env_ et renommer le en _.env.local_
 
 3.3 - Parametrer votre connexion à l'aide de la ligne correspondante a votre BDD

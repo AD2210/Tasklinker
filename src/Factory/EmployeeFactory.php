@@ -3,9 +3,9 @@
 namespace App\Factory;
 
 use App\Entity\Employee;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 
 /**
  * @extends PersistentProxyObjectFactory<Employee>
@@ -17,7 +17,7 @@ final class EmployeeFactory extends PersistentProxyObjectFactory
      *
      * 
      */
-    public function __construct(private UserPasswordHasherInterface $passwordHasher) {
+    public function __construct(private UserPasswordHasherInterface $passwordHasher, private readonly GoogleAuthenticatorInterface $googleAuthenticator) {
         parent::__construct();
     }
 
@@ -31,28 +31,33 @@ final class EmployeeFactory extends PersistentProxyObjectFactory
      *
      * 
      */
-    protected function defaults(): array|callable
+        protected function defaults(): array|callable
     {
         return [
-            'entry_date' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeThisDecade()),
-            'firstname' => self::faker()->firstName(),
-            'email' => self::faker()->unique()->companyEmail(),
-            'password' => 'password123',
-            'roles' => self::faker()->randomElement([['ROLE_USER'], ['ROLE_ADMIN']]),
-            'name' => self::faker()->lastName(),
-            'status' => self::faker()->randomElement(['CDI', 'CDD', 'Freelance']),
+            'entry_date'                  => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeThisDecade()),
+            'firstname'                   => self::faker()->firstName(),
+            'email'                       => self::faker()->unique()->companyEmail(),
+            'password'                    => 'password123',
+            'googleAuthenticatorSecret'   => '',
+            'roles'                       => self::faker()->randomElement([['ROLE_USER'], ['ROLE_ADMIN']]),
+            'name'                        => self::faker()->lastName(),
+            'status'                      => self::faker()->randomElement(['CDI', 'CDD', 'Freelance']),
         ];
     }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
-     */
     protected function initialize(): static
     {
         return $this
             ->afterInstantiate(function(Employee $employee): void {
-                $employee->setPassword($this->passwordHasher->hashPassword($employee, $employee->getPassword()));
-            })
-        ;
+                // Hasher le mot de passe (on récupère $this->passwordHasher injecté dans le constructeur)
+                $employee->setPassword(
+                    $this->passwordHasher->hashPassword($employee, $employee->getPassword())
+                );
+
+                // Générer et fixer le secret 2FA en utilisant le service injecté
+                $employee->setGoogleAuthenticatorSecret(
+                    $this->googleAuthenticator->generateSecret()
+                );
+            });
     }
 }
