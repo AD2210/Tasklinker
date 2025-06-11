@@ -37,35 +37,41 @@ final class TaskController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response {
         
-        $task ??= new Task; //Si aucune tâche passée = Nouvelle, si non edition
-        
-        // On set les valeurs par défaut dans le formulaire : project et status si nouvelle tâche
-        $task->setProject($project);
-        if ( !$task_status == null){
-           $task->setStatus($task_status); 
-        }
+        if ($this->isGranted('ROLE_ADMIN')){
 
-        $form = $this->createForm(TaskType::class, $task, [
-            // on passe le project en parametre du formulaire pour selectionner uniquement les employés affecté au project
-            'project' => $project,
-        ]);
-        
+            $task ??= new Task; //Si aucune tâche passée = Nouvelle, si non edition
+            
+            // On set les valeurs par défaut dans le formulaire : project et status si nouvelle tâche
+            $task->setProject($project);
+            if ( !$task_status == null){
+            $task->setStatus($task_status); 
+            }
 
-        
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($task);
-            $entityManager->flush();
+            $form = $this->createForm(TaskType::class, $task, [
+                // on passe le project en parametre du formulaire pour selectionner uniquement les employés affecté au project
+                'project' => $project,
+            ]);
+            
 
-            return $this->redirectToRoute('app_project', [
-                'id' => $project->getId()
+            
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($task);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_project', [
+                    'id' => $project->getId()
+                ]);
+            }
+
+            return $this->render('task/taskForm.html.twig', [
+                'form' => $form,
+                'task' => $task,
+                'project' => $project
             ]);
         }
-
-        return $this->render('task/taskForm.html.twig', [
-            'form' => $form,
-            'task' => $task,
-            'project' => $project
+        return $this->redirectToRoute('app_project', [
+            'id' => $project->getId()
         ]);
     }
 
@@ -82,6 +88,8 @@ final class TaskController extends AbstractController
         Project $project,
         EntityManagerInterface $entityManager,
     ): Response {
+
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null,'Access Denied.');
         if (!$task) {
             return $this->redirectToRoute('app_project_index');
         }
